@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table → JSON</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Table → JSON</h1>
+      <div class="controls">
+        <button id="convertBtn">Convert</button>
+        <button id="copyBtn" disabled>Copy JSON</button>
+        <button id="downloadBtn" disabled>Download JSON</button>
+        <button id="clearBtn">Clear</button>
+      </div>
+      <div class="status" id="status"></div>
+      <label>Input (paste spreadsheet table here)</label>
+      <textarea id="input" placeholder="Paste your table (TSV)"></textarea>
+
+      <label>Output JSON</label>
+      <textarea id="output" readonly></textarea>
+
+      <details id="errorsWrap">
+        <summary>Errors / Warnings (<span id="errCount">0</span>)</summary>
+        <ul id="errors"></ul>
+      </details>
+    </div>
+
+    <script type="module" src="./popup.ts"></script>
+  </body>
+</html>
