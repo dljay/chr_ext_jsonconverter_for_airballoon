@@ -1,4 +1,7 @@
 export type Converted = {
+  id: string;
+  tags: string[];
+  regionTags: string;
   title: string;
   region: string;
   nation: string;
@@ -8,6 +11,7 @@ export type Converted = {
   preferred_id: string[];
   ignore_id: string[];
   gmap_url: string;
+  custom_imgs: string[];
 };
 
 export type ParseResult = {
@@ -32,7 +36,7 @@ function validateKeywords(raw: string): { keywords: string[]; error?: string } {
     // find first offending character
     const idx = [...trimmed].findIndex((ch) => !/[A-Za-z ]/.test(ch));
     const bad = idx >= 0 ? trimmed[idx] : "?";
-    return { keywords: [], error: `7열 search keyword에 알파벳/공백 외 문자 발견: '${bad}'` };
+    return { keywords: [], error: `10열 search keyword에 알파벳/공백 외 문자 발견: '${bad}'` };
   }
   const kws = splitCsvLike(trimmed.toLowerCase());
   return { keywords: kws };
@@ -58,6 +62,11 @@ function parseIgnoreIds(raw: string): string[] {
   });
 }
 
+function parseTags(raw: string): string[] {
+  if (!raw || raw.trim() === "" || raw.trim() === "*" || raw.trim() === '"*"') return [];
+  return splitCsvLike(raw);
+}
+
 export function parseTsv(input: string): ParseResult {
   const lines = input
     .replace(/\r\n?/g, "\n")
@@ -70,14 +79,14 @@ export function parseTsv(input: string): ParseResult {
   lines.forEach((line, idx) => {
     const rowNum = idx + 1;
     const cells = line.split("\t").map((c) => c.trim());
-    if (cells.length < 10) {
-      warnings.push(`행 ${rowNum}: 컬럼 수(${cells.length})가 10보다 적음`);
+    if (cells.length < 13) {
+      warnings.push(`행 ${rowNum}: 컬럼 수(${cells.length})가 13보다 적음`);
     }
 
-    // normalize to at least 10 elements
-    while (cells.length < 10) cells.push("");
+    // normalize to at least 13 elements
+    while (cells.length < 13) cells.push("");
 
-    const [title, region, nation, description, _skip, description_src, search_kw_raw, preferred_raw, ignore_raw, gmap_url] = cells;
+    const [id, tags_raw, regionTags, title, region, nation, description, _skip, description_src, search_kw_raw, preferred_raw, ignore_raw, gmap_url] = cells;
 
     if (!title) {
       warnings.push(`행 ${rowNum}: title 비어있음`);
@@ -98,6 +107,9 @@ export function parseTsv(input: string): ParseResult {
     }
 
     const record: Converted = {
+      id,
+      tags: parseTags(tags_raw),
+      regionTags,
       title,
       region,
       nation,
@@ -107,6 +119,7 @@ export function parseTsv(input: string): ParseResult {
       preferred_id: parseIds(preferred_raw),
       ignore_id: parseIgnoreIds(ignore_raw),
       gmap_url,
+      custom_imgs: [],
     };
 
     ok.push(record);

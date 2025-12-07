@@ -13,15 +13,18 @@ MV3 popup extension that converts a pasted spreadsheet table (TSV) into a JSON a
 
 Columns (1-based):
 
-1. title
-2. region
-3. nation
-4. description
-5. (ignored)
-6. description_src (URL)
-7. search_keywords (only letters/spaces/commas allowed; invalid rows are excluded and reported)
-8. ignore_id (comma separated numbers)
-9. preferred_id (comma separated numbers; `*` or empty → empty array)
-10. gmap_url (URL)
+1. id
+2. tags (comma separated strings)
+3. regionTags
+4. title
+5. region
+6. nation
+7. description
+8. (ignored)
+9. description_src (URL)
+10. search_keywords (only letters/spaces/commas allowed; invalid rows are excluded and reported)
+11. preferred_id (comma separated numbers)
+12. ignore_id (comma separated numbers; `*` or empty → empty array)
+13. gmap_url (URL)
 
 Paste TSV from your spreadsheet; click Convert. Copy or Download JSON.

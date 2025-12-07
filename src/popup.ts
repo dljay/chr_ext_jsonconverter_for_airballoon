@@ -78,4 +78,4 @@ clearBtn.addEventListener("click", () => {
 // initial state
 setButtonsEnabled(false);
 renderErrors([], []);
-setStatus("TSV를 붙여넣고 Convert를 누르세요. 7번째 컬럼은 알파벳/공백/쉼표만 허용");
+setStatus("TSV를 붙여넣고 Convert를 누르세요. 10번째 컬럼은 알파벳/공백/쉼표만 허용");
