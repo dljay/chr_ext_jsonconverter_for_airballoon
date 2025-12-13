@@ -13,7 +13,7 @@ export type Converted = {
   gmap_url: string;
   latitude: number;
   longitude: number;
-  custom_imgs: string[];
+  custom_imgs?: string[];
 };
 
 export type ParseResult = {
@@ -133,7 +133,6 @@ export function parseTsv(input: string): ParseResult {
       gmap_url,
       latitude,
       longitude,
-      custom_imgs: [],
     };
 
     ok.push(record);
