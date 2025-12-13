@@ -20,11 +20,12 @@ Columns (1-based):
 5. region
 6. nation
 7. description
-8. (ignored)
-9. description_src (URL)
-10. search_keywords (only letters/spaces/commas allowed; invalid rows are excluded and reported)
-11. preferred_id (comma separated numbers)
-12. ignore_id (comma separated numbers; `*` or empty → empty array)
-13. gmap_url (URL)
+8. description_src (URL)
+9. search_keywords (only letters/spaces/commas allowed; invalid rows are excluded and reported)
+10. preferred_id (comma separated numbers)
+11. ignore_id (comma separated numbers; `*` or empty → empty array)
+12. gmap_url (URL)
+13. latitude (number)
+14. longitude (number)
 
 Paste TSV from your spreadsheet; click Convert. Copy or Download JSON.
